@@ -17,13 +17,13 @@
 
 | Model | Train Accuracy | Train Loss | Test Accuracy | Test Loss | Precision | Recall | F1-score | AUC Score |
 |-------|---------------|------------|---------------|-----------|-----------|--------|----------|-----------|
-| Teachable Machine | 0.9990 | 0.0100 | 0.9937 | 0.0445 | 0.9940 | 0.9937 | 0.9938 | 0.9998 |
-| Good Model (LW4) | 0.9401 | 0.2619 | 0.9275 | 0.3003 | 0.9287 | 0.9279 | 0.9272 | 0.9863 |
 | MobileNetV2 | 0.9138 | 0.3549 | 0.9268 | 0.3078 | 0.9272 | 0.9272 | 0.9263 | 0.9888 |
-| LW4 2nd Model | 0.9681 | 0.2087 | 0.8730 | 0.5878 | 0.8832 | 0.8718 | 0.8727 | 0.9797 |
-| LW3 1st Model | 0.8116 | 0.6194 | 0.8314 | 0.6069 | 0.8418 | 0.8321 | 0.8313 | 0.9605 |
-| ResNet50 | 0.3750 | 2.1839 | 0.3895 | 2.1736 | 0.4516 | 0.3914 | 0.3494 | 0.8537 |
 | EfficientNetB0 | 0.0626 | 3.0189 | 0.0538 | 3.1757 | 0.0027 | 0.0500 | 0.0051 | 0.6291 |
+| ResNet50 | 0.3750 | 2.1839 | 0.3895 | 2.1736 | 0.4516 | 0.3914 | 0.3494 | 0.8537 |
+| Teachable Machine | 0.9990 | 0.0100 | 0.9937 | 0.0445 | 0.9940 | 0.9937 | 0.9938 | 0.9998 |
+| LW3 1st Model | 0.8116 | 0.6194 | 0.8314 | 0.6069 | 0.8418 | 0.8321 | 0.8313 | 0.9605 |
+| LW4 2nd Model | 0.9681 | 0.2087 | 0.8730 | 0.5878 | 0.8832 | 0.8718 | 0.8727 | 0.9797 |
+| Good Model (LW4) | 0.9351 | 0.2701 | 0.924 | 0.2994 | 0.9239 | 0.9247 | 0.923 | 0.9868 |
 
 ---
 ## Guide Questions
@@ -58,7 +58,8 @@ In a 20-class problem like ours, accuracy treats all mistakes equally. It does n
 7. Which classes were frequently misclassified?<br>
 
 - Looking across all our confusion matrices, a few classes consistently gave the models trouble.<br><br>
-- <img width="1965" height="890" alt="image" src="https://github.com/user-attachments/assets/8a8d07cb-25ff-4b53-8a8e-b04a77fcb114" /><br><br>
+<img width="1965" height="890" alt="image" src="https://github.com/user-attachments/assets/04628e97-950a-4c52-96f6-e61c211f5e1e" />
+<br><br>
 
 - In the Good Model Confusion Matrix (right panel), Adelfa had a diagonal value of 57 out of 66 — decent but with some spread into neighboring classes, reflecting its visual similarity to other pink-flowering plants. Katakataka showed 57 correct but with notable misclassifications into nearby leaf-dominant species. Celosia had only 62 correct out of 75, consistent with its 83% recall in the classification report.<br><br>
 
@@ -78,7 +79,8 @@ In a 20-class problem like ours, accuracy treats all mistakes equally. It does n
 ## D. ROC and AUC
 <img width="208" height="144" alt="image" src="https://github.com/user-attachments/assets/584cccf0-54ab-4bf9-9c8d-cb581aaefd10" /><br>
 <img width="1189" height="889" alt="image" src="https://github.com/user-attachments/assets/59fb2525-16a9-4607-97c3-bf3d4e3a6966" /><br>
-<img width="1790" height="790" alt="image" src="https://github.com/user-attachments/assets/b6eaed7c-ccb4-4345-8740-ed979036d876" /><br>
+<img width="1790" height="790" alt="image" src="https://github.com/user-attachments/assets/37794c5f-8e16-4e26-8d13-3467f7207bc4" /><br><br>
+
 
 
 9. Which model had the highest AUC score?<br>
@@ -88,7 +90,7 @@ In a 20-class problem like ours, accuracy treats all mistakes equally. It does n
 
 <img width="1189" height="889" alt="image" src="https://github.com/user-attachments/assets/a51a85ef-9dde-4ae8-b857-d650e66b6b75" /><br>
 <img width="1189" height="889" alt="image" src="https://github.com/user-attachments/assets/f09cba42-4f6d-4f66-b244-eb8b09d287ad" /><br>
-<img width="1790" height="790" alt="image" src="https://github.com/user-attachments/assets/0ad87483-2042-4a65-b43b-a02f5118e97b" /><br><br>
+<img width="1790" height="790" alt="image" src="https://github.com/user-attachments/assets/37794c5f-8e16-4e26-8d13-3467f7207bc4" /><br><br>
 - An AUC of 1.0 means always. An AUC of 0.5 means never — just a coin flip.<br>
 - Looking at the MobileNetV2 ROC Curve, the curves all shoot steeply upward toward the top-left and flatten along the top edge — this shape means the model achieves very high true positive rates while keeping false positive rates near zero. The EfficientNetB0 ROC Curve shows the opposite: lines that slope diagonally from bottom-left to top-right, closely hugging the random baseline, meaning the model's probability scores carry almost no useful information about which class an image belongs to. The Good Model ROC Curve sits closer to the MobileNetV2 result — tight curves in the top-left corner, with the weakest class Adelfa still achieving AUC=0.96, a meaningful improvement from the baseline model's Adelfa AUC of 0.87.<Br><br>
 
@@ -110,13 +112,15 @@ MobileNetV2's heatmap shows a well-defined warm zone — deep red and orange —
 
 ## F. Model Comparison & Improvement
 14. Which model would you recommend for deployment? Why?<br><br>
-<img width="1136" height="218" alt="image" src="https://github.com/user-attachments/assets/41dddcc9-927e-4144-987c-a6bf191d68e4" /><br><br>
+<img width="1144" height="230" alt="image" src="https://github.com/user-attachments/assets/cf933a9d-97a9-45c7-9add-ce5b576b2db0" />
+<br><br>
 
 - Looking at the full summary table, the Good Model is the clear recommendation for deployment. It achieves test accuracy of 92.75%, train loss of 0.2619, test loss of 0.3003, F1-score of 0.9272, and AUC of 0.9863 — every single metric within or exceeding the recommended targets. But the most important number for real-world reliability is the generalization gap of just 1.26%, well within the ≤5% standard.<br>
 - The Good Model Training Curves make this confidence concrete. Looking at the accuracy plot, the validation curve actually runs above the training curve throughout Phase 1 — meaning the model generalized better on unseen data than it did on its own training data. In Phase 2, both curves converge and climb together to around 93% by the final epoch, with the training and validation lines tracking closely. The loss plot mirrors this story — both train and val loss drop together, converge, and flatten at a low value. There is no sign of the val loss spiking away from train loss, which is what overfitting looks like. Compare this to the LW4 2nd Model where train loss was 0.2087 but test loss was 0.5878 — a clear overfitting signal that the Good Model successfully avoided through transfer learning and proper regularization.<br><br>
 
 15. How can you further improve your best-performing model?<br><br>
-<img width="335" height="311" alt="image" src="https://github.com/user-attachments/assets/382b56d1-9210-455f-9286-907451bfe6ec" /><br><br>
+<img width="473" height="470" alt="image" src="https://github.com/user-attachments/assets/d98429b5-cc62-465a-aafa-4a4e8e50c623" />
+<br><br>
 
 - Several targeted improvements could push the Good Model beyond 92.75%. Unfreezing more of the MobileNetV2 backbone beyond the current 30 layers — perhaps 50 or more — with a very small learning rate of around 0.000005 would allow deeper adaptation of plant-specific features. Looking at the Good Model Classification Report, the three classes with the most room for improvement are Adelfa (F1: 0.87), Katakataka (0.89), and celosia (0.89) — adding 100 to 200 carefully selected images for just these three species would likely close the gap without a full retraining. Stronger augmentation techniques like random hue shifts and Gaussian noise could help the model handle the lighting variations real users will encounter when photographing plants outdoors. Test-Time Augmentation is a free accuracy boost that requires no additional training at all — just run each image through the model multiple times with slight variations and average the results, which typically adds 0.5% to 1.5% accuracy.<br><br>
 
