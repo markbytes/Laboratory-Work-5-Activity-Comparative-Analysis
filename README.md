@@ -1,6 +1,7 @@
 # Laboratory-Work-5-Activity-Comparative-Analysis
 
 # Google Collab: https://colab.research.google.com/drive/1dqIGs7VRWWRDJ0mISmvVYHgekBcfFYlb?usp=sharing
+# Good Model: https://colab.research.google.com/drive/1yIEG2he15AhLqo6j0Zbu9RJg2w2SS5-f?usp=sharing
 ## 📊 Model Comparison Results
 # Laboratory Work 5 — Comparative Analysis of Pre-trained CNN Models
 
