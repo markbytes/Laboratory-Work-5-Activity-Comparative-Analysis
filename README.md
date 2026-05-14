@@ -2,6 +2,7 @@
 
 # Google Collab: https://colab.research.google.com/drive/1dqIGs7VRWWRDJ0mISmvVYHgekBcfFYlb?usp=sharing
 # Good Model: https://colab.research.google.com/drive/1yIEG2he15AhLqo6j0Zbu9RJg2w2SS5-f?usp=sharing
+# TM Model: https://colab.research.google.com/drive/1mvlEreBlQD4-TvWbogtvyHsCBDB3UVT2?usp=sharing
 ## 📊 Model Comparison Results
 # Laboratory Work 5 — Comparative Analysis of Pre-trained CNN Models
 
